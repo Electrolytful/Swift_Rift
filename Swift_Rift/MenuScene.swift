@@ -21,12 +21,18 @@ class MenuScene: SKScene {
     var creditButton:SKSpriteNode!
     
     var highscoreLabel:SKLabelNode!
-    var score:SKLabelNode!
+    var score:Int = 0 {
+        didSet {
+            highscoreLabel.text = "Highscore : \(score)"
+        }
+    }
     
     //declaring an audio player
     var audioPlayer:AVAudioPlayer!
     
     override func didMove(to view: SKView) {
+        
+        scene?.scaleMode = SKSceneScaleMode.resizeFill
         
         //assigning varibales above with the linking assets in MenuScene.sks
         starbg = (self.childNode(withName: "starBack") as! SKEmitterNode)
@@ -38,10 +44,7 @@ class MenuScene: SKScene {
         creditButton = (self.childNode(withName: "creditsButton") as! SKSpriteNode)
         
         highscoreLabel = (self.childNode(withName: "highscore") as! SKLabelNode)
-        score = (self.childNode(withName: "score") as! SKLabelNode)
         
-        //initial value of highscore set to 0
-        score.text = "0"
         
         //creating an audio player to play a sound effect when button is pressed, could return an error
         do{
@@ -64,7 +67,7 @@ class MenuScene: SKScene {
             if nodes.first?.name == "playButton" || nodes.first?.name == "playLabel" {
                 let trans = SKTransition.doorsOpenHorizontal(withDuration: 0.5)
                 let diffScene = SelectDiffScene(fileNamed: "SelectDiffScene")
-                diffScene?.scaleMode = .aspectFit
+                diffScene?.scaleMode = SKSceneScaleMode.resizeFill
                 playSound()
                 self.view?.presentScene(diffScene!, transition: trans)
             }
@@ -72,7 +75,7 @@ class MenuScene: SKScene {
             else if nodes.first?.name == "instructionsButton" || nodes.first?.name == "instructLabel" {
                 let trans = SKTransition.doorsOpenHorizontal(withDuration: 0.5)
                 let insScene = InstructionScene(fileNamed: "InstructionScene")
-                insScene?.scaleMode = .aspectFit
+                insScene?.scaleMode = SKSceneScaleMode.resizeFill
                 playSound()
                 self.view?.presentScene(insScene!, transition: trans)
             }
@@ -80,7 +83,7 @@ class MenuScene: SKScene {
             else if nodes.first?.name == "creditsButton" || nodes.first?.name == "creditsLabel" {
                 let trans = SKTransition.doorsOpenHorizontal(withDuration: 0.5)
                 let credScene = CreditScene(fileNamed: "CreditScene")
-                credScene?.scaleMode = .aspectFit
+                credScene?.scaleMode = SKSceneScaleMode.resizeFill
                 playSound()
                 self.view?.presentScene(credScene!, transition: trans)
             }

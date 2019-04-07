@@ -76,7 +76,7 @@ class CreditScene: SKScene {
             if nodes.first?.name == "backButton" || nodes.first?.name == "back" {
                 let trans = SKTransition.doorsCloseHorizontal(withDuration: 0.5)
                 let menuScreen = MenuScene(fileNamed: "MenuScene")
-                menuScreen?.scaleMode = .aspectFit
+                menuScreen?.scaleMode = SKSceneScaleMode.resizeFill
                 self.view?.presentScene(menuScreen!, transition: trans)
             }
         }

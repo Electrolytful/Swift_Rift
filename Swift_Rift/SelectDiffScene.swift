@@ -35,6 +35,9 @@ class SelectDiffScene: SKScene {
     //variable for spaceship avatar
     var player:SKSpriteNode!
     
+    //variable for storing the current difficulty selection as a srting to compare in the game scene
+    static var diff:String!
+    
     
     override func didMove(to view: SKView) {
         
@@ -60,7 +63,6 @@ class SelectDiffScene: SKScene {
         player = (self.childNode(withName: "player") as! SKSpriteNode)
         
         
-        
     }
     
     //checking whether back button is pressed to return to the main menu screen
@@ -68,13 +70,52 @@ class SelectDiffScene: SKScene {
         
         let touch = touches.first
         
+        
         if let location = touch?.location(in: self){
             let nodes = self.nodes(at: location)
+            
+            
+            if nodes.first?.name == "easyButton" || nodes.first?.name == "easyLabel" {
+                SelectDiffScene.diff = "easy"
+                
+                let trans = SKTransition.crossFade(withDuration: 1)
+                let gameScreen = GameScene(fileNamed: "GameScene")
+                gameScreen?.scaleMode = SKSceneScaleMode.resizeFill
+                self.view?.presentScene(gameScreen!, transition: trans)
+            }
+            
+            if nodes.first?.name == "mediumButton" || nodes.first?.name == "mediumLabel" {
+                SelectDiffScene.diff = "medium"
+                
+                let trans = SKTransition.crossFade(withDuration: 1)
+                let gameScreen = GameScene(fileNamed: "GameScene")
+                gameScreen?.scaleMode = SKSceneScaleMode.resizeFill
+                self.view?.presentScene(gameScreen!, transition: trans)
+            }
+            
+            if nodes.first?.name == "hardButton" || nodes.first?.name == "hardLabel" {
+                SelectDiffScene.diff = "hard"
+                
+                let trans = SKTransition.crossFade(withDuration: 1)
+                let gameScreen = GameScene(fileNamed: "GameScene")
+                gameScreen?.scaleMode = SKSceneScaleMode.resizeFill
+                self.view?.presentScene(gameScreen!, transition: trans)
+            }
+            
+            if nodes.first?.name == "insaneButton" || nodes.first?.name == "insaneLabel" {
+                SelectDiffScene.diff = "insane"
+                
+                let trans = SKTransition.crossFade(withDuration: 1)
+                let gameScreen = GameScene(fileNamed: "GameScene")
+                gameScreen?.scaleMode = SKSceneScaleMode.resizeFill
+                self.view?.presentScene(gameScreen!, transition: trans)
+            }
+            
             
             if nodes.first?.name == "backButton" || nodes.first?.name == "back" {
                 let trans = SKTransition.doorsCloseHorizontal(withDuration: 0.5)
                 let menuScreen = MenuScene(fileNamed: "MenuScene")
-                menuScreen?.scaleMode = .aspectFit
+                menuScreen?.scaleMode = SKSceneScaleMode.resizeFill
                 self.view?.presentScene(menuScreen!, transition: trans)
             }
         }

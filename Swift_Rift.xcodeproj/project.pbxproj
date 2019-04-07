@@ -32,6 +32,10 @@
 		EAA6EADD2226D95100E9A813 /* InstructionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA6EADC2226D95100E9A813 /* InstructionScene.swift */; };
 		EAA6EADF2227FDAC00E9A813 /* CreditScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA6EADE2227FDAC00E9A813 /* CreditScene.swift */; };
 		EAA6EAE12228589E00E9A813 /* SelectDiffScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA6EAE02228589E00E9A813 /* SelectDiffScene.swift */; };
+		EAA6EAE3223E758A00E9A813 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EAA6EAE2223E758A00E9A813 /* GameScene.sks */; };
+		EAA6EAE5223E75AF00E9A813 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA6EAE4223E75AF00E9A813 /* GameScene.swift */; };
+		EAA6EAE72258CAA800E9A813 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EAA6EAE62258CAA800E9A813 /* GameOverScene.sks */; };
+		EAA6EAE92258CABE00E9A813 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA6EAE82258CABE00E9A813 /* GameOverScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +66,10 @@
 		EAA6EADC2226D95100E9A813 /* InstructionScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionScene.swift; sourceTree = "<group>"; };
 		EAA6EADE2227FDAC00E9A813 /* CreditScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditScene.swift; sourceTree = "<group>"; };
 		EAA6EAE02228589E00E9A813 /* SelectDiffScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDiffScene.swift; sourceTree = "<group>"; };
+		EAA6EAE2223E758A00E9A813 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		EAA6EAE4223E75AF00E9A813 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		EAA6EAE62258CAA800E9A813 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
+		EAA6EAE82258CABE00E9A813 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +113,10 @@
 				EAA6EADE2227FDAC00E9A813 /* CreditScene.swift */,
 				EAA6EAA22225515500E9A813 /* SelectDiffScene.sks */,
 				EAA6EAE02228589E00E9A813 /* SelectDiffScene.swift */,
+				EAA6EAE2223E758A00E9A813 /* GameScene.sks */,
+				EAA6EAE4223E75AF00E9A813 /* GameScene.swift */,
+				EAA6EAE62258CAA800E9A813 /* GameOverScene.sks */,
+				EAA6EAE82258CABE00E9A813 /* GameOverScene.swift */,
 				EAA6EA70221D6E0C00E9A813 /* GameViewController.swift */,
 				EAA6EA72221D6E0C00E9A813 /* Main.storyboard */,
 				EAA6EA8122254BFB00E9A813 /* explosion.mp3 */,
@@ -190,6 +202,7 @@
 				EAA6EA76221D6E0E00E9A813 /* Assets.xcassets in Resources */,
 				EAA6EA9022254C1100E9A813 /* gameover.png in Resources */,
 				EAA6EA8522254BFC00E9A813 /* explosion.mp3 in Resources */,
+				EAA6EAE72258CAA800E9A813 /* GameOverScene.sks in Resources */,
 				EAA6EAC3222566EF00E9A813 /* CreditScene.sks in Resources */,
 				EAA6EAA32225515500E9A813 /* SelectDiffScene.sks in Resources */,
 				EAA6EA79221D6E0E00E9A813 /* LaunchScreen.storyboard in Resources */,
@@ -199,6 +212,7 @@
 				EAA6EA6D221D6E0C00E9A813 /* Actions.sks in Resources */,
 				EAA6EA9122254C1100E9A813 /* difficulty.png in Resources */,
 				EAA6EA8722254BFC00E9A813 /* Explosion.sks in Resources */,
+				EAA6EAE3223E758A00E9A813 /* GameScene.sks in Resources */,
 				EAA6EA9D2225508E00E9A813 /* spark.png in Resources */,
 				EAA6EA8F22254C1100E9A813 /* title.png in Resources */,
 				EAA6EA9322254C1100E9A813 /* invader.png in Resources */,
@@ -214,9 +228,11 @@
 			files = (
 				EAA6EABF22255FD000E9A813 /* MenuScene.swift in Sources */,
 				EAA6EADD2226D95100E9A813 /* InstructionScene.swift in Sources */,
+				EAA6EAE92258CABE00E9A813 /* GameOverScene.swift in Sources */,
 				EAA6EA71221D6E0C00E9A813 /* GameViewController.swift in Sources */,
 				EAA6EAE12228589E00E9A813 /* SelectDiffScene.swift in Sources */,
 				EAA6EA69221D6E0C00E9A813 /* AppDelegate.swift in Sources */,
+				EAA6EAE5223E75AF00E9A813 /* GameScene.swift in Sources */,
 				EAA6EADF2227FDAC00E9A813 /* CreditScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
