@@ -19,20 +19,23 @@ class MenuScene: SKScene {
     var instructButton:SKSpriteNode!
     var quitButton:SKSpriteNode!
     var creditButton:SKSpriteNode!
+    var resetButton:SKSpriteNode!
     
     var highscoreLabel:SKLabelNode!
-    var score:Int = 0 {
-        didSet {
-            highscoreLabel.text = "Highscore : \(score)"
-        }
-    }
+    var highscore = UserDefaults.standard
     
     //declaring an audio player
     var audioPlayer:AVAudioPlayer!
     
+    
     override func didMove(to view: SKView) {
         
         scene?.scaleMode = SKSceneScaleMode.resizeFill
+        
+        if highscore.object(forKey: "highscore") == nil {
+            highscore.set(0, forKey: "highscore")
+        }
+        
         
         //assigning varibales above with the linking assets in MenuScene.sks
         starbg = (self.childNode(withName: "starBack") as! SKEmitterNode)
@@ -42,8 +45,10 @@ class MenuScene: SKScene {
         instructButton = (self.childNode(withName: "instructionsButton") as! SKSpriteNode)
         quitButton = (self.childNode(withName: "quitButton") as! SKSpriteNode)
         creditButton = (self.childNode(withName: "creditsButton") as! SKSpriteNode)
+        resetButton = (self.childNode(withName: "resetButton") as! SKSpriteNode)
         
-        highscoreLabel = (self.childNode(withName: "highscore") as! SKLabelNode)
+        highscoreLabel = (self.childNode(withName: "highscoreLabel") as! SKLabelNode)
+        highscoreLabel.text = "HIGHSCORE: \(UserDefaults.standard.integer(forKey: "highscore"))"
         
         
         //creating an audio player to play a sound effect when button is pressed, could return an error
@@ -54,6 +59,11 @@ class MenuScene: SKScene {
             print(error)
         }
         
+    }
+    
+    //function that is called to play the sound effect for the buttons
+    func playSound(){
+        audioPlayer.play()
     }
     
     //method to detect touch and check whether a button is pressed and the corresponding scene is opened
@@ -91,18 +101,21 @@ class MenuScene: SKScene {
             else if nodes.first?.name == "quitButton" || nodes.first?.name == "quitLabel" {
                 exit(0)
             }
+            
+            else if nodes.first?.name == "resetButton" || nodes.first?.name == "resetLabel" {
+                UserDefaults.standard.set(0, forKey: "highscore")
+                print("Highscore has been reset!")
+                
+                let trans = SKTransition.crossFade(withDuration: 0.2)
+                let menuScene = MenuScene(fileNamed: "MenuScene")
+                menuScene?.scaleMode = SKSceneScaleMode.resizeFill
+                playSound()
+                self.view?.presentScene(menuScene!, transition: trans)
+            }
         }
         
         
     }
-    
-    //function that is called to play the sound effect for the buttons
-    func playSound(){
-        audioPlayer.play()
-    }
-    
 
-    
-    
 
 }

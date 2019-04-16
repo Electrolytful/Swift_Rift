@@ -28,6 +28,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    static var didWin:Bool!
+    static var scoreTransfer:Int!
+    
     //variables that are changed depending on difficulty selected in previous scene
     var gameDuration:Int!
     var invaderDuration:Int!
@@ -37,6 +40,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var invaderTimer:Timer!
     var gameTimer:Timer!
     
+    //variables for the live countdown timer during level
+    var timeLabel:SKLabelNode!
+    var count:Int!
+    var countdownTimer:Timer!
     
     //specifying variable identifiers for the invaders category and the laser beam category to be used in bitmasks
     let invaderID:UInt32 = 0x1 << 1
@@ -51,27 +58,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //changing duration of game and speed of invaders depending on difficulty currently selected
         if SelectDiffScene.diff == "easy" {
-            gameDuration = 45
-            invaderDuration = 10
-            invaderInterval = 5
-        }
-        else if SelectDiffScene.diff == "medium" {
-            gameDuration = 60
-            invaderDuration = 8
-            invaderInterval = 5
-        }
-        else if SelectDiffScene.diff == "hard" {
-            gameDuration = 75
-            invaderDuration = 6
-            invaderInterval = 4
-        }
-        else if SelectDiffScene.diff == "insane" {
-            gameDuration = 90
-            invaderDuration = 4
+            gameDuration = 30
+            count = 30
+            invaderDuration = 5
             invaderInterval = 2
         }
+        else if SelectDiffScene.diff == "medium" {
+            gameDuration = 40
+            count = 40
+            invaderDuration = 3
+            invaderInterval = 2
+        }
+        else if SelectDiffScene.diff == "hard" {
+            gameDuration = 50
+            count = 50
+            invaderDuration = 3
+            invaderInterval = 1
+        }
+        else if SelectDiffScene.diff == "insane" {
+            gameDuration = 60
+            count = 60
+            invaderDuration = 2
+            invaderInterval = 1
+        }
         
-        
+        GameScene.didWin = true
         
         starback = (self.childNode(withName: "starback") as! SKEmitterNode)
         starback.advanceSimulationTime(10)
@@ -81,6 +92,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel = (self.childNode(withName: "scoreLabel") as! SKLabelNode)
         
         lifeLabel = (self.childNode(withName: "lifeLabel") as! SKLabelNode)
+        
+        timeLabel = (self.childNode(withName: "timeLabel") as! SKLabelNode)
         
         //removing gravity from the scene
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
@@ -92,11 +105,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         invaderTimer = Timer.scheduledTimer(timeInterval: TimeInterval(invaderInterval), target: self, selector: #selector(addInvader), userInfo: nil, repeats: true)
         
         
+        countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        
+        
         motionManager.accelerometerUpdateInterval = 0.2
         motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { (data:CMAccelerometerData?, error:Error?) in
             if let accelerometerData = data {
                 let acceleration = accelerometerData.acceleration
-                self.xAccel = CGFloat(acceleration.x) * 0.75 + self.xAccel * 0.25
+                self.xAccel = CGFloat(acceleration.x) * 0.85 + self.xAccel * 0.50
             }
             
         }
@@ -112,6 +128,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
+    @objc func updateTimer() {
+        if count > 0 {
+            count = count - 1
+            timeLabel.text = "Time: \(count ?? 0)"
+        }
+    }
     
     //function to generate invaders which move from top to bottom of the screen with a specific time interval
     @objc func addInvader() {
@@ -146,10 +168,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             if self.life == 0 {
-                let trans = SKTransition.crossFade(withDuration: 2)
-                let gameOverScreen = GameOverScene(fileNamed: "GameOverScene")
-                gameOverScreen?.scaleMode = SKSceneScaleMode.resizeFill
-                self.view?.presentScene(gameOverScreen!, transition: trans)
+                GameScene.didWin = false
+                self.gotoGameOver()
             }
         })
         
@@ -246,7 +266,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     @objc func gotoGameOver() {
-        let trans = SKTransition.crossFade(withDuration: 2)
+        if GameScene.didWin {
+            GameScene.scoreTransfer = score
+        }
+        else {
+            GameScene.scoreTransfer = 0
+        }
+        
+        let trans = SKTransition.crossFade(withDuration: 0.2)
         let gameOverScene = GameOverScene(fileNamed: "GameOverScene")
         gameOverScene?.scaleMode = SKSceneScaleMode.resizeFill
         self.view?.presentScene(gameOverScene!, transition: trans)

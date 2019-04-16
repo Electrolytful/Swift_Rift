@@ -35,7 +35,7 @@ class SelectDiffScene: SKScene {
     //variable for spaceship avatar
     var player:SKSpriteNode!
     
-    //variable for storing the current difficulty selection as a srting to compare in the game scene
+    //variable for storing the current difficulty selection as a string to compare in the game scene
     static var diff:String!
     
     
